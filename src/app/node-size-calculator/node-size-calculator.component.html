@@ -1,0 +1,5 @@
+@if (treeGenerated()) {
+<dv-tree [data]="data"></dv-tree>
+} @else { @for (datum of data; track $index) {
+<dv-node [nodeInfo]="{ id: datum.id, summary: datum.summary }" #node></dv-node>
+} }
