@@ -1,10 +1,18 @@
 import { Injectable } from '@angular/core';
 
+export type FlatDatum = {
+  id: number;
+  summary: string;
+  speaker: string;
+  response_to: number | null;
+  topic: string;
+};
+
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  data: any[];
+  data: FlatDatum[];
 
   constructor() {
     this.data = [
@@ -105,11 +113,5 @@ export class DataService {
         topic: 'COVID-19 Response',
       },
     ];
-  }
-
-  spliceSizes(sizes: number[][]) {
-    for (let i = 0; i < sizes.length; i++) {
-      this.data[i].size = sizes[i];
-    }
   }
 }

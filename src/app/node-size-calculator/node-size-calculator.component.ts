@@ -7,7 +7,7 @@ import {
   signal,
 } from '@angular/core';
 import { NodeComponent } from '../node/node.component';
-import { DataService } from '../data.service';
+import { DataService, FlatDatum } from '../data.service';
 import { TreeComponent } from '../tree/tree.component';
 
 @Component({
@@ -19,27 +19,28 @@ import { TreeComponent } from '../tree/tree.component';
 })
 export class NodeSizeCalculatorComponent implements AfterViewInit {
   @ViewChildren('node') nodes!: QueryList<NodeComponent>;
-  treeGenerated: WritableSignal<boolean>;
+  sizes: number[][];
+  sizesCalculated: WritableSignal<boolean>;
+  data: FlatDatum[];
 
-  constructor(public dataService: DataService) {
-    this.treeGenerated = signal(false);
+  constructor(private _dataService: DataService) {
+    this.sizes = [];
+    this.sizesCalculated = signal(false);
+    this.data = this._dataService.data;
   }
 
   ngAfterViewInit(): void {
-    const sizes: number[][] = [];
-
+    // calculate the size of all nodes
     for (const node of this.nodes) {
       const nativeElement = node.elementRef.nativeElement;
 
       const width = nativeElement.offsetWidth;
       const height = nativeElement.offsetHeight;
 
-      sizes.push([width, height]);
+      // swap height and width because default orietnation of the flextree is vertical and we want a horizontal tree
+      this.sizes.push([height, width]);
     }
 
-    this.dataService.spliceSizes(sizes);
-    this.treeGenerated.set(true);
+    this.sizesCalculated.set(true);
   }
-
-  data = this.dataService.data;
 }

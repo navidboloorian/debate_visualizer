@@ -3,6 +3,7 @@ import { Component, Input, ElementRef } from '@angular/core';
 type NodeInfo = {
   id: number;
   summary: string;
+  speaker: string;
 };
 
 @Component({
