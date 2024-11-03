@@ -18,7 +18,9 @@ export class TreeService {
   constructor() {}
 
   generateTree(data: FlatDatum[], sizes: number[][]) {
-    const layout = flextree<TreeDatum | null>({});
+    const layout = flextree<TreeDatum | null>({
+      spacing: 50,
+    });
 
     // lookup table to convert from flat array to hierarchy structure needed for flextree using IDs as keys
     const lookup = new Map<number, TreeDatum>();

@@ -1,26 +1,29 @@
-<svg width="100%" height="10000" #svg>
+<svg #svg>
   <g>
-    @for (link of tree.links(); track $index) {
     {{
       "" // swapping x and y values and width and height values because the tree is horizontal
     }}
+    @for (link of tree.links(); track $index) {
     <line
       [attr.x1]="link.source.y"
       [attr.y1]="link.source.x"
       [attr.x2]="link.target.y"
       [attr.y2]="link.target.x"
-      stroke="black"
+      stroke="white"
       stroke-width="5"
     />
     } @for (node of tree.descendants(); track $index) { @if (node.data) {
 
     <foreignObject
-      [attr.x]="node.y"
+      [attr.x]="node.y - node.data.size[1] / 2"
       [attr.y]="node.x - node.data.size[0] / 2"
       [attr.width]="node.data.size[1]"
       [attr.height]="node.data.size[0]"
     >
-      <dv-node [nodeInfo]="node.data"></dv-node>
+      <dv-node
+        [nodeInfo]="node.data"
+        [colors]="this.speakerColors.get(node.data.speaker)!"
+      ></dv-node>
     </foreignObject>
     } }
   </g>

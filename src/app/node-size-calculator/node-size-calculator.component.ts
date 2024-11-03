@@ -34,7 +34,9 @@ export class NodeSizeCalculatorComponent implements AfterViewInit {
     for (const node of this.nodes) {
       const nativeElement = node.elementRef.nativeElement;
 
-      const width = nativeElement.offsetWidth;
+      const gap = 20;
+
+      const width = nativeElement.offsetWidth + gap;
       const height = nativeElement.offsetHeight;
 
       // swap height and width because default orietnation of the flextree is vertical and we want a horizontal tree

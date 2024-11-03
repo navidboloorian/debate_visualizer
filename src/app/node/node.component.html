@@ -1,3 +1,14 @@
 <div class="node">
-  <p>{{ nodeInfo.summary }}</p>
+  <div class="speaker" [ngStyle]="{ 'background-color': colors.accent }">
+    <p>{{ nodeInfo.speaker }}</p>
+  </div>
+  <div
+    class="summary"
+    [ngStyle]="{
+      'background-color': colors.primary,
+      'border-color': colors.accent
+    }"
+  >
+    <p>{{ nodeInfo.summary }}</p>
+  </div>
 </div>

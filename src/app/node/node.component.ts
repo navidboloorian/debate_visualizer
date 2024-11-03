@@ -1,4 +1,5 @@
-import { Component, Input, ElementRef } from '@angular/core';
+import { Component, Input, ElementRef, OnInit } from '@angular/core';
+import { NgStyle } from '@angular/common';
 
 type NodeInfo = {
   id: number;
@@ -9,12 +10,17 @@ type NodeInfo = {
 @Component({
   selector: 'dv-node',
   standalone: true,
-  imports: [],
+  imports: [NgStyle],
   templateUrl: './node.component.html',
   styleUrl: './node.component.scss',
 })
-export class NodeComponent {
+export class NodeComponent implements OnInit {
   @Input() nodeInfo!: NodeInfo;
+  @Input() colors: { primary: string; accent: string } = {
+    primary: '',
+    accent: '',
+  };
 
   constructor(public elementRef: ElementRef) {}
+  ngOnInit(): void {}
 }
