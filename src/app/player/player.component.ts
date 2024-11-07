@@ -19,6 +19,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   constructor(protected treeService: TreeService) {}
 
   ngOnInit(): void {
+    // handle window resizing by forcing node size recalculation
     this.windowResizeObservable$ = fromEvent(window, 'resize');
     this.windowResizeSubscription$ = this.windowResizeObservable$.subscribe(
       () => this.treeService.nodeSizesCalculated.set(false)
