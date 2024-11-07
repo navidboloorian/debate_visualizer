@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal, WritableSignal } from '@angular/core';
 import { flextree } from 'd3-flextree';
 import { FlatDatum } from './data.service';
 
@@ -15,9 +15,15 @@ export type TreeDatum = {
   providedIn: 'root',
 })
 export class TreeService {
-  constructor() {}
+  nodeSizesCalculated: WritableSignal<boolean>;
+  nodeSizes: WritableSignal<number[][]>;
 
-  generateTree(data: FlatDatum[], sizes: number[][]) {
+  constructor() {
+    this.nodeSizesCalculated = signal(false);
+    this.nodeSizes = signal([]);
+  }
+
+  generateTree(data: FlatDatum[]) {
     const layout = flextree<TreeDatum | null>({
       spacing: 50,
     });
@@ -29,7 +35,7 @@ export class TreeService {
     // converting from FlatDatum to TreeDatum
     for (let i = 0; i < data.length; i++) {
       const datum = data[i];
-      const size = sizes[i];
+      const size = this.nodeSizes()[i];
 
       // FlatDatum info
       const { id, summary, speaker, topic } = datum;

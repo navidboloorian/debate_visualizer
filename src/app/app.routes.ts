@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { NodeSizeCalculatorComponent } from './node-size-calculator/node-size-calculator.component';
+import { PlayerComponent } from './player/player.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: NodeSizeCalculatorComponent,
+    component: PlayerComponent,
     title: 'Debate Visualizer',
   },
 ];

@@ -1,9 +1,6 @@
-{{ "" // when sizes are calculated, we can render the tree }}
-@if (sizesCalculated()) {
-<dv-tree [data]="data" [sizes]="sizes"></dv-tree>
-} @else { @for (datum of data; track $index) {
+@for (datum of data; track $index) {
 <dv-node
   [nodeInfo]="{ id: datum.id, summary: datum.summary, speaker: datum.speaker }"
   #node
 ></dv-node>
-} }
+}

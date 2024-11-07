@@ -3,33 +3,36 @@ import {
   AfterViewInit,
   ViewChildren,
   QueryList,
-  WritableSignal,
-  signal,
 } from '@angular/core';
 import { NodeComponent } from '../node/node.component';
 import { DataService, FlatDatum } from '../data.service';
-import { TreeComponent } from '../tree/tree.component';
+import { TreeService } from '../tree.service';
 
 @Component({
   selector: 'dv-node-size-calculator',
   standalone: true,
-  imports: [NodeComponent, TreeComponent],
+  imports: [NodeComponent],
   templateUrl: './node-size-calculator.component.html',
   styleUrl: './node-size-calculator.component.scss',
 })
 export class NodeSizeCalculatorComponent implements AfterViewInit {
   @ViewChildren('node') nodes!: QueryList<NodeComponent>;
-  sizes: number[][];
-  sizesCalculated: WritableSignal<boolean>;
   data: FlatDatum[];
 
-  constructor(private _dataService: DataService) {
-    this.sizes = [];
-    this.sizesCalculated = signal(false);
+  constructor(
+    private _dataService: DataService,
+    private _treeService: TreeService
+  ) {
     this.data = this._dataService.data;
   }
 
   ngAfterViewInit(): void {
+    this.calculateNodeSizes();
+  }
+
+  calculateNodeSizes(): void {
+    const sizes: number[][] = [];
+
     // calculate the size of all nodes
     for (const node of this.nodes) {
       const nativeElement = node.elementRef.nativeElement;
@@ -40,9 +43,10 @@ export class NodeSizeCalculatorComponent implements AfterViewInit {
       const height = nativeElement.offsetHeight;
 
       // swap height and width because default orietnation of the flextree is vertical and we want a horizontal tree
-      this.sizes.push([height, width]);
+      sizes.push([height, width]);
     }
 
-    this.sizesCalculated.set(true);
+    this._treeService.nodeSizesCalculated.set(true);
+    this._treeService.nodeSizes.set(sizes);
   }
 }

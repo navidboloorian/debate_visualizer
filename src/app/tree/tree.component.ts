@@ -2,14 +2,13 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  Input,
   OnInit,
   ViewChild,
 } from '@angular/core';
 import { TreeDatum, TreeService } from '../tree.service';
 import { NodeComponent } from '../node/node.component';
 import * as d3 from 'd3';
-import { FlatDatum } from '../data.service';
+import { DataService, FlatDatum } from '../data.service';
 import { FlextreeNode } from 'd3-flextree';
 
 @Component({
@@ -20,19 +19,22 @@ import { FlextreeNode } from 'd3-flextree';
   styleUrl: './tree.component.scss',
 })
 export class TreeComponent implements OnInit, AfterViewInit {
-  @Input() data!: FlatDatum[];
-  @Input() sizes!: number[][];
   @ViewChild('svg') treeContainer!: ElementRef;
+  data: FlatDatum[];
   speakerColors: Map<string, { primary: string; accent: string }>;
   tree!: FlextreeNode<TreeDatum | null>;
 
-  constructor(private _treeService: TreeService) {
+  constructor(
+    private _treeService: TreeService,
+    private _dataService: DataService
+  ) {
     this.speakerColors = new Map();
+    this.data = _dataService.data;
   }
 
   ngOnInit(): void {
     this.assignColors();
-    this.tree = this._treeService.generateTree(this.data, this.sizes);
+    this.tree = this._treeService.generateTree(this.data);
   }
 
   ngAfterViewInit(): void {
