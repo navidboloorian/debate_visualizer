@@ -1,6 +1,10 @@
 <div class="node">
-  <div class="speaker" [ngStyle]="{ 'background-color': colors.accent }">
-    <p>{{ nodeInfo.speaker }}</p>
+  <div class="tag" [ngStyle]="{ 'background-color': colors.accent }">
+    <p class="speaker">{{ nodeInfo.speaker }}</p>
+
+    @if (nodeInfo.timestamp) {
+    <p class="timestamp">{{ nodeInfo.timestamp }}</p>
+    }
   </div>
   <div
     class="summary"

@@ -6,6 +6,7 @@ export type FlatDatum = {
   speaker: string;
   response_to: number | null;
   topic: string;
+  timestamp?: string;
 };
 
 @Injectable({
@@ -17,100 +18,157 @@ export class DataService {
   constructor() {
     this.data = [
       {
-        id: 0,
-        summary:
-          'Justifies nominating Amy Coney Barrett, stating that elections have consequences and the administration has the right to make the nomination.',
-        speaker: 'Trump',
-        response_to: null,
-        topic: 'Supreme Court Nomination',
-      },
-      {
         id: 1,
         summary:
-          'Praises Barrett, calling her a top academic and emphasizing bipartisan support for her qualifications.',
-        speaker: 'Trump',
-        response_to: 0,
-        topic: 'Supreme Court Nomination',
+          "The government's role should be to ensure individuals can reach their full potential. This might involve assisting with education, housing, or necessities without advocating for a total command economy.",
+        speaker: 'Destiny',
+        response_to: null,
+        timestamp: '00:01:50',
+        topic: 'Role of Government',
       },
       {
         id: 2,
         summary:
-          'States that the Democrats would not hesitate to make a nomination if they were in power and suggests they would have acted more quickly.',
-        speaker: 'Trump',
-        response_to: 0,
-        topic: 'Supreme Court Nomination',
+          'The government should not exist just for its own size or tax purposes, but should efficiently fund necessary programs without demonizing success or wealth.',
+        speaker: 'Destiny',
+        response_to: 1,
+        timestamp: '00:02:34',
+        topic: 'Role of Government',
       },
       {
         id: 3,
         summary:
-          'Argues that the American people should have a say in the nomination through their vote, and that the nomination should wait until after the election since people are already voting.',
-        speaker: 'Biden',
-        response_to: 0,
-        topic: 'Supreme Court Nomination',
+          "Government should preserve key liberties and have minimal interference in people's lives, focusing on national defense, property rights, and religious freedom.",
+        speaker: 'Ben Shapiro',
+        response_to: 1,
+        timestamp: '00:03:07',
+        topic: 'Role of Government',
       },
       {
         id: 4,
         summary:
-          "Expresses concern that Barrett's appointment could lead to the dismantling of the Affordable Care Act, stripping millions of healthcare coverage, especially regarding pre-existing conditions.",
-        speaker: 'Biden',
-        response_to: 1,
-        topic: 'Healthcare',
+          'Local governments are more effective due to their homogeneity and consent, while federal involvement often results in impractical and divisive policies.',
+        speaker: 'Ben Shapiro',
+        response_to: 3,
+        timestamp: '00:03:33',
+        topic: 'Local vs. Federal Government',
       },
       {
         id: 5,
         summary:
-          "Challenges Biden's numbers on pre-existing conditions, stating there aren't 100 million people affected and asserts the right to continue the nomination.",
-        speaker: 'Trump',
+          'Human nature has good and bad aspects. Society should incentivize good behavior while acknowledging individual agency and equal value before the law.',
+        speaker: 'Ben Shapiro',
         response_to: 4,
-        topic: 'Healthcare',
+        timestamp: '00:05:17',
+        topic: 'Human Nature',
       },
       {
         id: 6,
         summary:
-          "Criticizes Biden's healthcare proposals, claiming that Biden's plan will eliminate private healthcare for 180 million people.",
-        speaker: 'Trump',
+          "It's unrealistic to expect everyone to have equal skills and abilities; the government's role is not to rectify every inequality but to provide a fair starting point.",
+        speaker: 'Ben Shapiro',
         response_to: 5,
-        topic: 'Healthcare',
+        timestamp: '00:05:36',
+        topic: 'Equality and Government Role',
       },
       {
         id: 7,
         summary:
-          "Denies Trump's claim, stating that the plan would expand Obamacare while allowing people to keep their private insurance.",
-        speaker: 'Biden',
+          'Economic opportunity should be balanced by free markets and the protection of family as the core social institution.',
+        speaker: 'Ben Shapiro',
         response_to: 6,
-        topic: 'Healthcare',
+        timestamp: '00:06:34',
+        topic: 'Economic Opportunity',
       },
       {
         id: 8,
         summary:
-          "Argues that Biden's party wants socialist medicine, while Biden asserts he controls the Democratic Party.",
-        speaker: 'Trump',
-        response_to: 7,
-        topic: 'Healthcare',
+          'Better funding and technology in schools can increase student potential, but it’s unrealistic to expect everyone to achieve equally due to different starting points.',
+        speaker: 'Destiny',
+        response_to: 5,
+        timestamp: '00:06:49',
+        topic: 'Education and Funding',
       },
       {
         id: 9,
         summary:
-          'Emphasizes approval of the Democratic Party platform, which supports Obamacare and pre-existing condition protections.',
-        speaker: 'Biden',
+          'School funding should prioritize core issues like family stability over technological investments or minor facility improvements.',
+        speaker: 'Ben Shapiro',
         response_to: 8,
-        topic: 'Healthcare',
+        timestamp: '00:09:00',
+        topic: 'Education and Family Structure',
       },
       {
         id: 10,
         summary:
-          'Points to the impact of COVID-19, noting the deaths and millions infected, questioning what repealing the Affordable Care Act would mean for those affected.',
-        speaker: 'Biden',
-        response_to: 8,
-        topic: 'Healthcare',
+          'Basic school improvements, such as providing air conditioning and meals, could lead to marginal gains in student outcomes.',
+        speaker: 'Destiny',
+        response_to: 9,
+        timestamp: '00:10:17',
+        topic: 'School Improvements',
       },
       {
         id: 11,
         summary:
-          "Counters by blaming Biden for 308,000 military deaths and argues that under Biden's leadership, the COVID-19 death toll would have been higher.",
-        speaker: 'Trump',
+          'Investing in minor school improvements may not solve deeper educational issues related to family structure and societal values.',
+        speaker: 'Ben Shapiro',
         response_to: 10,
-        topic: 'COVID-19 Response',
+        timestamp: '00:11:28',
+        topic: 'Education and Social Issues',
+      },
+      {
+        id: 12,
+        summary:
+          'Proposing incremental improvements often gets sidestepped by conservative arguments focusing on deeper social issues, creating a circular debate.',
+        speaker: 'Destiny',
+        response_to: 11,
+        timestamp: '00:12:50',
+        topic: 'Debate Strategy',
+      },
+      {
+        id: 13,
+        summary:
+          'The real issue is a cultural shift away from valuing marriage and stable family structures, not just economic or educational factors.',
+        speaker: 'Ben Shapiro',
+        response_to: 12,
+        timestamp: '00:13:24',
+        topic: 'Cultural Values and Family',
+      },
+      {
+        id: 14,
+        summary:
+          'Economic conditions and increased education delay marriage, which contributes to the rise in out-of-wedlock births.',
+        speaker: 'Destiny',
+        response_to: 13,
+        timestamp: '00:13:52',
+        topic: 'Economic Impact on Marriage',
+      },
+      {
+        id: 15,
+        summary:
+          'The moral status of marriage has shifted culturally, not because of economic circumstances, but due to changes in societal values.',
+        speaker: 'Ben Shapiro',
+        response_to: 14,
+        timestamp: '00:14:16',
+        topic: 'Cultural Values and Marriage',
+      },
+      {
+        id: 16,
+        summary:
+          'Regressing social standards to previous eras, such as promoting shotgun marriages, is unlikely to happen due to societal evolution.',
+        speaker: 'Destiny',
+        response_to: 15,
+        timestamp: '00:14:37',
+        topic: 'Social Change and Marriage',
+      },
+      {
+        id: 17,
+        summary:
+          'History is not linear, and social standards can and do regress, as shown by movements like the rejection of Roe v. Wade.',
+        speaker: 'Ben Shapiro',
+        response_to: 16,
+        timestamp: '00:15:11',
+        topic: 'Historical Regression',
       },
     ];
   }

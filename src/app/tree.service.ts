@@ -7,6 +7,7 @@ export type TreeDatum = {
   summary: string;
   speaker: string;
   topic: string;
+  timestamp?: string;
   size: number[];
   children: TreeDatum[];
 };
@@ -38,7 +39,7 @@ export class TreeService {
       const size = this.nodeSizes()[i];
 
       // FlatDatum info
-      const { id, summary, speaker, topic } = datum;
+      const { id, summary, speaker, topic, timestamp } = datum;
 
       // splice sizes, drop response_to, and add children
       const treeDatum: TreeDatum = {
@@ -47,6 +48,7 @@ export class TreeService {
         speaker,
         topic,
         size,
+        timestamp,
         children: [],
       };
 
