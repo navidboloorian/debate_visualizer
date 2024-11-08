@@ -85,7 +85,7 @@ export class DataService {
         summary:
           'Better funding and technology in schools can increase student potential, but it’s unrealistic to expect everyone to achieve equally due to different starting points.',
         speaker: 'Destiny',
-        response_to: 5,
+        response_to: 6,
         timestamp: '00:06:49',
         topic: 'Education and Funding',
       },
