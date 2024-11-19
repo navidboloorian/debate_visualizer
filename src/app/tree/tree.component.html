@@ -1,30 +1,43 @@
-<svg #svg>
+<svg #svg id="parentSvg">
   <g>
     {{
       "" // swapping x and y values and width and height values because the tree is horizontal
     }}
-    @for (link of tree.links(); track $index) {
-    <line
-      [attr.x1]="link.source.y"
-      [attr.y1]="link.source.x"
-      [attr.x2]="link.target.y"
-      [attr.y2]="link.target.x"
-      stroke="white"
-      stroke-width="5"
-    />
-    } @for (node of tree.descendants(); track $index) { @if (node.data) {
 
-    <foreignObject
-      [attr.x]="node.y - node.data.size[1] / 2"
-      [attr.y]="node.x - node.data.size[0] / 2"
-      [attr.width]="node.data.size[1]"
-      [attr.height]="node.data.size[0]"
-    >
-      <dv-node
-        [nodeInfo]="node.data"
-        [colors]="this.speakerColors.get(node.data.speaker)!"
-      ></dv-node>
-    </foreignObject>
+    @for (link of tree.links(); track $index) {
+      <foreignObject
+        [attr.x]="link.source.y!"
+        [attr.y]="link.source.x! == link.target.x! ? link.source.x! - 5: {number1: link.source.x!, number2: link.target.x!} | min"
+        [attr.width]="link.target.y! - link.source.y!"
+        [attr.height]="((link.target.x! - link.source.x!) | abs) + 10"
+      >
+        <ng-container *ngIf="({x1: link.source.y!, y1: link.source.x!, x2: link.target.y!, y2: link.target.x!} | arrowCoordinates) as coordinates">
+          <dv-arrow
+            [x1]="coordinates.x1"
+            [y1]="coordinates.y1"
+            [x2]="coordinates.x2"
+            [y2]="coordinates.y2"
+            [time]="link.target.data!.time"
+          />
+        </ng-container>
+      </foreignObject>
+    }
+
+    @for (node of tree.descendants(); track $index) { @if (node.data) {
+
+      <foreignObject
+        [attr.x]="node.y - node.data.size[1] / 2"
+        [attr.y]="node.x - node.data.size[0] / 2"
+        [attr.width]="node.data.size[1]"
+        [attr.height]="node.data.size[0]"
+      >
+        <dv-node
+          [nodeInfo]="node.data"
+          [colors]="this.speakerColors.get(node.data.speaker)!"
+        ></dv-node>
+      </foreignObject>
     } }
+
+
   </g>
 </svg>

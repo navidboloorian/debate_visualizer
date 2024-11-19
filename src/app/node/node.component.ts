@@ -7,19 +7,19 @@ import {
 } from '@angular/core';
 import { NgStyle } from '@angular/common';
 import { AudioService } from '../audio.service';
-import { TimeService } from '../time.service';
+import { SecondsToTimestampPipe } from '../pipes/seconds-to-timestamp.pipe';
 
 type NodeInfo = {
   id: number;
   summary: string;
   speaker: string;
-  timestamp?: string;
+  time?: number;
 };
 
 @Component({
   selector: 'dv-node',
   standalone: true,
-  imports: [NgStyle],
+  imports: [NgStyle, SecondsToTimestampPipe],
   templateUrl: './node.component.html',
   styleUrl: './node.component.scss',
 })
@@ -34,14 +34,11 @@ export class NodeComponent implements OnInit {
   constructor(
     public elementRef: ElementRef,
     public audioService: AudioService,
-    public timeService: TimeService
   ) {}
 
   @HostListener('click') onClick() {
-    if (this.nodeInfo.timestamp) {
-      this.audioService.setTime(
-        this.timeService.timeStringToSeconds(this.nodeInfo.timestamp)
-      );
+    if (this.nodeInfo.time) {
+      this.audioService.setTime(this.nodeInfo.time);
     }
   }
 

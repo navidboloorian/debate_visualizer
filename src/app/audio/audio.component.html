@@ -1,3 +1,4 @@
+
 <div id="audio-player-container">
   <audio controls src="assets/example.mp3" #audio></audio>
   <div class="controls">
@@ -6,8 +7,8 @@
       <button #pause>Pause</button>
     </div>
     <p class="timestamp">
-      {{ timeService.timeSecondsToString(audioService.currentTime()) }} /
-      {{ timeService.timeSecondsToString(audio.duration) }}
+      {{ audioService.currentTime() | timestamp }} /
+      {{ audio.duration | timestamp }}
     </p>
   </div>
   <input id="time-slider" value="0" type="range" max="100" #slider />

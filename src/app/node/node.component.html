@@ -1,9 +1,12 @@
-<div class="node">
+<div
+  class="node"
+  [class.hidden]="nodeInfo.time ? audioService.currentTime() < nodeInfo.time : false"
+>
   <div class="tag" [ngStyle]="{ 'background-color': colors.accent }">
     <p class="speaker">{{ nodeInfo.speaker }}</p>
 
-    @if (nodeInfo.timestamp) {
-    <p class="timestamp">{{ nodeInfo.timestamp }}</p>
+    @if (nodeInfo.time) {
+    <p class="timestamp">{{ nodeInfo.time | timestamp }}</p>
     }
   </div>
   <div

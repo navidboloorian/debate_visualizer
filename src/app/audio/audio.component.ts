@@ -1,11 +1,11 @@
 import { Component, ElementRef, AfterViewInit, ViewChild } from '@angular/core';
 import { AudioService } from '../audio.service';
-import { TimeService } from '../time.service';
+import { SecondsToTimestampPipe } from '../pipes/seconds-to-timestamp.pipe';
 
 @Component({
   selector: 'dv-audio',
   standalone: true,
-  imports: [],
+  imports: [SecondsToTimestampPipe],
   templateUrl: './audio.component.html',
   styleUrl: './audio.component.scss',
 })
@@ -15,10 +15,7 @@ export class AudioComponent implements AfterViewInit {
   @ViewChild('play') play!: ElementRef<HTMLButtonElement>;
   @ViewChild('pause') pause!: ElementRef<HTMLButtonElement>;
 
-  constructor(
-    public audioService: AudioService,
-    public timeService: TimeService
-  ) {}
+  constructor(public audioService: AudioService) {}
 
   ngAfterViewInit(): void {
     this.audioService.bindElements(this.audioElement, this.sliderElement);
@@ -31,4 +28,7 @@ export class AudioComponent implements AfterViewInit {
       this.audioElement.nativeElement.pause();
     };
   }
+
+  protected readonly console = console;
+  protected readonly NaN = NaN;
 }

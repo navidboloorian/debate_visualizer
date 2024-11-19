@@ -1,13 +1,14 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { flextree } from 'd3-flextree';
 import { FlatDatum } from './data.service';
+import { TimestampToSecondsPipe } from './pipes/timestamp-to-seconds.pipe';
 
 export type TreeDatum = {
   id: number;
   summary: string;
   speaker: string;
   topic: string;
-  timestamp?: string;
+  time?: number;
   size: number[];
   children: TreeDatum[];
 };
@@ -19,7 +20,7 @@ export class TreeService {
   nodeSizesCalculated: WritableSignal<boolean>;
   nodeSizes: WritableSignal<number[][]>;
 
-  constructor() {
+  constructor(private _toSeconds: TimestampToSecondsPipe) {
     this.nodeSizesCalculated = signal(false);
     this.nodeSizes = signal([]);
   }
@@ -41,6 +42,12 @@ export class TreeService {
       // FlatDatum info
       const { id, summary, speaker, topic, timestamp } = datum;
 
+      let time;
+
+      if (timestamp) {
+        time = this._toSeconds.transform(timestamp);
+      }
+
       // splice sizes, drop response_to, and add children
       const treeDatum: TreeDatum = {
         id,
@@ -48,7 +55,7 @@ export class TreeService {
         speaker,
         topic,
         size,
-        timestamp,
+        time,
         children: [],
       };
 
