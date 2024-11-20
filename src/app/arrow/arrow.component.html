@@ -1,4 +1,4 @@
-<svg [class.hidden] = "time ? audioService.currentTime() < time : false" [attr.height]="((y2 - y1) | abs) + 200" [attr.width]="x2 - x1">
+<svg [class.hidden] = "time ? audioService.elapsedTime() < time : false" [attr.height]="((y2 - y1) | abs) + 200" [attr.width]="x2 - x1">
   <g [attr.transform]="y1 == y2 ? 'translate(0, 5)' : 'translate(0, 0)'">
     <line
       [attr.x1]="x1"

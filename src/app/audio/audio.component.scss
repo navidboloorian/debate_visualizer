@@ -12,6 +12,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 0.5rem;
+    height: 1.5rem;
 
     .buttons {
       height: 1rem;
@@ -21,7 +22,6 @@
       font-size: 1rem;
       color: white;
       font-family: "Open Sans", sans-serif;
-      margin-left: 0.8rem;
       margin: 0;
     }
   }
@@ -31,10 +31,13 @@
     background: transparent;
     cursor: pointer;
     border-radius: 0;
-    border: 0px;
+    border: 0;
     width: 100%;
-    margin: 0px;
-    height: calc(100% - 1rem);
+    margin: 0;
+    height: calc(100% - 1.5rem);
+    z-index: 2;
+    position: absolute;
+    bottom: 0;
   }
 
   input[type="range"]::-webkit-slider-runnable-track,
@@ -51,8 +54,8 @@
     background-color: #2492f3;
     height: 100%;
     width: 0.5rem;
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
   }
 
   input[type="range"]:focus {

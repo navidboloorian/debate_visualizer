@@ -18,7 +18,7 @@ export class AudioService {
 
   bindElements(
     audioElement: ElementRef<HTMLAudioElement>,
-    sliderElement: ElementRef<HTMLInputElement>
+    sliderElement: ElementRef<HTMLInputElement>,
   ) {
     this._bindAudioElement(audioElement);
     this._bindSliderElement(sliderElement);
@@ -55,7 +55,10 @@ export class AudioService {
     this.audioElement!.ontimeupdate = () => {
       const roundedTime = Math.floor(this.audioElement!.currentTime);
 
-      this.sliderElement!.value = roundedTime.toString();
+      if (roundedTime > this.elapsedTime()) {
+        this.elapsedTime.set(roundedTime);
+      }
+
       this.currentTime.set(roundedTime);
     };
   }

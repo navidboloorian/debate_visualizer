@@ -1,6 +1,6 @@
 <div
   class="node"
-  [class.hidden]="nodeInfo.time ? audioService.currentTime() < nodeInfo.time : false"
+  [class.hidden]="nodeInfo.time ? audioService.elapsedTime() < nodeInfo.time : false"
 >
   <div class="tag" [ngStyle]="{ 'background-color': colors.accent }">
     <p class="speaker">{{ nodeInfo.speaker }}</p>

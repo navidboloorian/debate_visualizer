@@ -11,5 +11,6 @@
       {{ audio.duration | timestamp }}
     </p>
   </div>
-  <input id="time-slider" value="0" type="range" max="100" #slider />
+  <div></div>
+  <input [value]="audioService.currentTime()" type="range" max="100" #slider />
 </div>
