@@ -89,7 +89,7 @@ export class TreeComponent implements OnInit, AfterViewInit {
     const content = svgElement.select<SVGGElement>('g');
     const zoom = d3
       .zoom()
-      .scaleExtent([1, 1])
+      .scaleExtent([0.1, 1])
       .on('zoom', (event) => {
         content.attr('transform', event.transform);
       });

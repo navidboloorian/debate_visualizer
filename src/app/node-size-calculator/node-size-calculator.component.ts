@@ -21,7 +21,7 @@ export class NodeSizeCalculatorComponent implements AfterViewInit {
 
   constructor(
     private _dataService: DataService,
-    private _treeService: TreeService
+    private _treeService: TreeService,
   ) {
     this.data = this._dataService.data;
   }
@@ -42,7 +42,7 @@ export class NodeSizeCalculatorComponent implements AfterViewInit {
       const width = nativeElement.offsetWidth + gap;
       const height = nativeElement.offsetHeight;
 
-      // swap height and width because default orietnation of the flextree is vertical and we want a horizontal tree
+      // swap height and width because default orientation of the flextree is vertical and we want a horizontal tree
       sizes.push([height, width]);
     }
 
