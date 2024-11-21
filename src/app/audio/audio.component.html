@@ -11,6 +11,6 @@
       {{ audio.duration | timestamp }}
     </p>
   </div>
-  <div></div>
   <input [value]="audioService.currentTime()" type="range" max="100" #slider />
+  <div id="event-markers" #markers></div>
 </div>
