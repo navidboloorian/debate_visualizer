@@ -8,6 +8,7 @@ import {
 import { NgStyle } from '@angular/common';
 import { AudioService } from '../audio.service';
 import { SecondsToTimestampPipe } from '../pipes/seconds-to-timestamp.pipe';
+import { TreeSettingsService } from '../tree-settings.service';
 
 type NodeInfo = {
   id: number;
@@ -34,6 +35,7 @@ export class NodeComponent implements OnInit {
   constructor(
     public elementRef: ElementRef,
     public audioService: AudioService,
+    public treeSettings: TreeSettingsService,
   ) {}
 
   @HostListener('click') onClick() {

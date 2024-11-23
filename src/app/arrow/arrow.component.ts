@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { AbsoluteValuePipe } from '../pipes/absolute-value.pipe';
 import { AudioService } from '../audio.service';
+import { TreeSettingsService } from '../tree-settings.service';
 
 @Component({
   selector: 'dv-arrow',
@@ -16,5 +17,8 @@ export class ArrowComponent {
   @Input() y2!: number;
   @Input() time?: number;
 
-  constructor(public audioService: AudioService) {}
+  constructor(
+    public audioService: AudioService,
+    public treeSettings: TreeSettingsService,
+  ) {}
 }

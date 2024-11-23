@@ -1,0 +1,5 @@
+<div>
+  <label for="show-node-based-on-time">Show nodes when arguments are made in the audio</label>
+  <input id="show-node-based-on-time" type="checkbox" #timeBasedNodes [ngModel]="treeSettings.showNodesBasedOnTime()"
+         (ngModelChange)="treeSettings.showNodesBasedOnTime.set($event)"/>
+</div>
